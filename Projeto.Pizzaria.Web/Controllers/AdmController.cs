@@ -20,6 +20,14 @@ namespace Projeto.Pizzaria.Web.Controllers
             var categorias = Mapper.Map<IEnumerable<CategoriaProduto>, IEnumerable<CategoriaProdutoModel>>(dao.Consultar(new CategoriaProduto()));
             return View(categorias);
         }
+        [HttpGet]
+        public ActionResult Produtos()
+        {
+            var dao = new DaoCategoriaProduto();
+            var categorias = dao.BuscarTodos();
+            return View(categorias);
+        }
+
 
         public ActionResult Create()
         {
