@@ -14,18 +14,48 @@ namespace Projeto.Pizzaria.Dao.Data
     {
         public void Alterar(CategoriaProduto item)
         {
-            throw new NotImplementedException();
+            var query = @"
+                UPDATE t_categoria_produto
+                   set 
+                    nome_categoria_produto  = @Nome, 
+                    desc_categoria_produto  = @Descricao, 
+                    percentual_desconto     = @PercentualDesconto
+                WHERE id_categoria_produto = @Id";
+
+            using (var conn = new SqlConnection(Util.Util.ConnectionString()))
+            {
+                conn.Execute(query, item);
+            }
         }
 
         public CategoriaProduto Buscar(int id)
         {
-            throw new NotImplementedException();
+            var query = @"
+                select 
+                    Id                  = id_categoria_produto,
+                    Nome                = nome_categoria_produto,
+                    Descricao           = desc_categoria_produto,
+                    PercentualDesconto  = percentual_desconto
+                from t_categoria_produto
+                where 
+                    (id_categoria_produto = @IdCategoria)";
+
+            using (var conn = new SqlConnection(Util.Util.ConnectionString()))
+            {
+                var categoria = conn.Query<CategoriaProduto>(query, new { IdCategoria = id});
+                return categoria.ToList().FirstOrDefault();
+            }
         }
 
         public IEnumerable<CategoriaProduto> Consultar(CategoriaProduto item)
         {
             var query = @"
-                select * from t_categoria_produto
+                select 
+                    Id                  = id_categoria_produto,
+                    Nome                = nome_categoria_produto,
+                    Descricao           = desc_categoria_produto,
+                    PercentualDesconto  = percentual_desconto
+                from t_categoria_produto
                 where 
                     (@IdCategoria is null or id_categoria_produto = @IdCategoria) and
                     (@NomeCategoria is null or nome_categoria_produto = @NomeCategoria)";
@@ -39,12 +69,18 @@ namespace Projeto.Pizzaria.Dao.Data
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            using (var conn = new SqlConnection(Util.Util.ConnectionString()))
+            {
+                conn.Execute("delete t_categoria_produto where id_categoria_produto = @Id", new { Id = id});
+            }
         }
 
         public void Incluir(CategoriaProduto item)
         {
-            throw new NotImplementedException();
+            using (var conn = new SqlConnection(Util.Util.ConnectionString()))
+            {
+                conn.Execute("INSERT INTO t_categoria_produto(nome_categoria_produto, desc_categoria_produto, percentual_desconto) VALUES(@Nome, @Descricao, @PercentualDesconto)", item);
+            }
         }
     }
 }

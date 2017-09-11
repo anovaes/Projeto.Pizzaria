@@ -17,11 +17,7 @@ namespace Projeto.Pizzaria.Web.Properties {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
-        public static Settings Default {
-            get {
-                return defaultInstance;
-            }
-        }
+        
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
