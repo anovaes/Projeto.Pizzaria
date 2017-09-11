@@ -91,6 +91,17 @@ namespace Projeto.Pizzaria.Dao.Data
             }
         }
 
+
+        public void DeletarTudos()
+        {
+            using (var conn = new SqlConnection(Util.Util.ConnectionString()))
+            {
+                conn.Execute("delete t_categoria_produto");
+            }
+        }
+
+
+
         public void Incluir(CategoriaProduto item)
         {
             using (var conn = new SqlConnection(Util.Util.ConnectionString()))
