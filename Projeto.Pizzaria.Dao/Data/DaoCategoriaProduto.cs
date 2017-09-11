@@ -47,6 +47,22 @@ namespace Projeto.Pizzaria.Dao.Data
             }
         }
 
+        public List<CategoriaProduto> BuscarTodos()
+        {
+            var query = @"
+                select 
+                    Id                  = id_categoria_produto,
+                    Nome                = nome_categoria_produto,
+                    Descricao           = desc_categoria_produto,
+                    PercentualDesconto  = percentual_desconto
+                from t_categoria_produto";
+
+            using (var conn = new SqlConnection(Util.Util.ConnectionString()))
+            {
+                var categoria = conn.Query<CategoriaProduto>(query);
+                return categoria.ToList();
+            }
+        }
         public IEnumerable<CategoriaProduto> Consultar(CategoriaProduto item)
         {
             var query = @"
