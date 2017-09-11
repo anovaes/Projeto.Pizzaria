@@ -20,8 +20,6 @@ namespace Projeto.Pizzaria.Web.Models
             Descricao = descricao;
             Valor = valor;
             Disponivel = disponivel;
-
         }
-
     }
 }
