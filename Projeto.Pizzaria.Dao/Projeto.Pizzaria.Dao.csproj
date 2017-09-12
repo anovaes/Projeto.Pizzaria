@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Data\DaoCategoriaProduto.cs" />
+    <Compile Include="Data\DaoProduto.cs" />
     <Compile Include="Entidade\Produto.cs" />
     <Compile Include="Entidade\CategoriaProduto.cs" />
     <Compile Include="Interface\IDao.cs" />
