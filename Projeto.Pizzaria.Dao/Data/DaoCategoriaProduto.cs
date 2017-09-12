@@ -16,7 +16,7 @@ namespace Projeto.Pizzaria.Dao.Data
         {
             var query = @"
                 UPDATE t_categoria_produto
-                   set 
+                   SET 
                     nome_categoria_produto  = @Nome, 
                     desc_categoria_produto  = @Descricao, 
                     percentual_desconto     = @PercentualDesconto
@@ -31,13 +31,13 @@ namespace Projeto.Pizzaria.Dao.Data
         public CategoriaProduto Buscar(int id)
         {
             var query = @"
-                select 
+                SELECT 
                     Id                  = id_categoria_produto,
                     Nome                = nome_categoria_produto,
                     Descricao           = desc_categoria_produto,
                     PercentualDesconto  = percentual_desconto
-                from t_categoria_produto
-                where 
+                FROM t_categoria_produto
+                WHERE 
                     (id_categoria_produto = @IdCategoria)";
 
             using (var conn = new SqlConnection(Util.Util.ConnectionString()))
@@ -50,12 +50,12 @@ namespace Projeto.Pizzaria.Dao.Data
         public List<CategoriaProduto> BuscarTodos()
         {
             var query = @"
-                select 
+                SELECT 
                     Id                  = id_categoria_produto,
                     Nome                = nome_categoria_produto,
                     Descricao           = desc_categoria_produto,
                     PercentualDesconto  = percentual_desconto
-                from t_categoria_produto";
+                FROM t_categoria_produto";
 
             using (var conn = new SqlConnection(Util.Util.ConnectionString()))
             {
@@ -66,13 +66,13 @@ namespace Projeto.Pizzaria.Dao.Data
         public IEnumerable<CategoriaProduto> Consultar(CategoriaProduto item)
         {
             var query = @"
-                select 
+                SELECT 
                     Id                  = id_categoria_produto,
                     Nome                = nome_categoria_produto,
                     Descricao           = desc_categoria_produto,
                     PercentualDesconto  = percentual_desconto
-                from t_categoria_produto
-                where 
+                FROM t_categoria_produto
+                WHERE 
                     (@IdCategoria is null or id_categoria_produto = @IdCategoria) and
                     (@NomeCategoria is null or nome_categoria_produto = @NomeCategoria)";
 
@@ -87,20 +87,18 @@ namespace Projeto.Pizzaria.Dao.Data
         {
             using (var conn = new SqlConnection(Util.Util.ConnectionString()))
             {
-                conn.Execute("delete t_categoria_produto where id_categoria_produto = @Id", new { Id = id});
+                conn.Execute("DELETE FROM t_categoria_produto WHERE id_categoria_produto = @Id", new { Id = id});
             }
         }
 
 
-        public void DeletarTudos()
+        public void DeletarCategoriasTodas()
         {
             using (var conn = new SqlConnection(Util.Util.ConnectionString()))
             {
-                conn.Execute("delete t_categoria_produto");
+                conn.Execute("DELETE FROM t_categoria_produto");
             }
         }
-
-
 
         public void Incluir(CategoriaProduto item)
         {
