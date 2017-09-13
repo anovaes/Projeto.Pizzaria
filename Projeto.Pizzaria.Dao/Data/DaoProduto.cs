@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 namespace Projeto.Pizzaria.Dao.Data
 {
 
-    public class DaoProduto : IDao<Produto>
+    public class DaoProduto : IDaoProduto
     {
         public void Alterar(Produto item)
         {
             var query = @"
                 UPDATE t_produto
                    SET 
-                    id_categoria_produto  = @IdProduto, 
-                    nome_produto  = @NomeProduto, 
+                    id_categoria_produto  = @IdCategoriaProduto, 
+                    nome_produto  = @Nome, 
                     desc_produto     = @Descricao,
-                    valor_produto   = @ValorProduto,
+                    valor_produto   = @Valor,
                     flag_disponivel  = @Disponivel
                 WHERE id_produto = @Id";
 
@@ -35,11 +35,11 @@ namespace Projeto.Pizzaria.Dao.Data
         {
             var query = @"
                 SELECT 
-                    Id                  = id_prosuto
-                    IdCategoria         = id_categoria_produto,
-                    Nome                = nome__produto,
-                    Descricao           = desc__produto,
-                    ValorProduto        = valor_produto,
+                    Id                  = id_produto,
+                    IdCategoriaProduto  = id_categoria_produto,
+                    Nome                = nome_produto,
+                    Descricao           = desc_produto,
+                    Valor               = valor_produto,
                     Disponivel          = flag_disponivel
                 FROM t_produto
                 WHERE 
@@ -56,15 +56,16 @@ namespace Projeto.Pizzaria.Dao.Data
         {
             var query = @"
                 SELECT 
-                    Id                  = id_produto
-                    IdCategoria         = id_categoria_produto,
-                    Nome                = nome__produto,
-                    Descricao           = desc__produto,
-                    ValorProduto        = valor_produto,
-                    Disponivel          = flag_disponivel
-                FROM t_produto
-                WHERE (id_produto = @IdProduto) and
-                    (@NomeCategoria is null or nome_produto = @NomeProduto)";
+                    Id                      = p.id_produto,
+                    IdCategoria             = p.id_categoria_produto,
+	                NomeCategoriaProduto	= cp.nome_categoria_produto,
+                    Nome                    = p.nome_produto,
+                    Descricao               = p.desc_produto,
+                    Valor                   = p.valor_produto,
+                    Disponivel              = p.flag_disponivel
+                FROM t_produto p
+                join t_categoria_produto cp
+                 on(p.id_categoria_produto = cp.id_categoria_produto)";
 
             using (var conn = new SqlConnection(Util.Util.ConnectionString()))
             {
@@ -93,7 +94,7 @@ namespace Projeto.Pizzaria.Dao.Data
         {
             using (var conn = new SqlConnection(Util.Util.ConnectionString()))
             {
-                conn.Execute("INSERT INTO t_produto(id_categoria_produto,nome_produto, desc_produto,valor_produto,flag_disponivel) VALUES (@IdCategoria,@NomeProduto, @DescricaoProduto, @ValorProduto,@FlagDisponivel)", item);
+                conn.Execute("INSERT INTO t_produto(id_categoria_produto,nome_produto, desc_produto,valor_produto,flag_disponivel) VALUES (@IdCategoriaProduto,@Nome, @Descricao, @Valor,@Disponivel)", item);
             }
         }
     }

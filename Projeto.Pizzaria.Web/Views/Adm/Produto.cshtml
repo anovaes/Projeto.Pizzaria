@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Projeto.Pizzaria.Web.Models.ProdutoModel>
+
+@{
+    ViewBag.Title = "Produto";
+}
+
+<h2>Produto</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar", "CreateProduto")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeCategoriaProduto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Disponivel)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeCategoriaProduto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Valor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disponivel)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "EditProduto", new { id=item.Id }) |
+            @Html.ActionLink("Detalhe", "DetailsProduto", new { id=item.Id }) |
+            @Html.ActionLink("Deletar", "DeleteProduto", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

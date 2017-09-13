@@ -17,6 +17,7 @@ namespace Projeto.Pizzaria.Web.App_Start
 
             //Instrução para mapear a interface IPessoa para a classe concreta Pessoa
             kernel.Bind<IDaoCategoriaProduto>().To<DaoCategoriaProduto>();
+            kernel.Bind<IDaoProduto>().To<DaoProduto>();
 
             //Registra o container no ASP.NET
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));

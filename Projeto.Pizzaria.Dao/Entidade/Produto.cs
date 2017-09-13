@@ -10,6 +10,7 @@ namespace Projeto.Pizzaria.Dao.Entidade
     {
         public int Id { get; set; }
         public int IdCategoriaProduto { get; set; }
+        public string NomeCategoriaProduto { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public double Valor { get; set; }
