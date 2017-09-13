@@ -1,50 +1,14 @@
-﻿@model IEnumerable<Projeto.Pizzaria.Web.Models.CategoriaProdutoModel>
+﻿
 
 @{
     ViewBag.Title = "Pizzaria";
 }
 
-<h2>Index</h2>
-
-<p>
-    @*@Html.ActionLink("Criar novo", "Create")*@
-    <input type="button" value="Criar novo" onclick="location.href='@Url.Action("Create", "Adm")';return false;" />
-</p>
-<p>
-    <input type="button" value="Listar produtos" onclick="location.href='@Url.Action("Produtos", "Adm")';return false;" />
-    @*@Html.ActionLink("Listar todos produtos", "Produtos")*@
-</p>
-<table class="table">
-    @*<tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PercentualDesconto)
-        </th>
-        <th></th>
-    </tr>*@
-
-@*@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PercentualDesconto)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}*@
-
-</table>
+<div class="container">
+    <div class="jumbotron">
+        <h2>Administração</h2>
+        <p>Quadro de avisos.</p>
+    </div>
+    <p>- Cadastre as categoria acessando o menu de navegação.</p>
+    <p>- Cadastre os produtos acessando o menu de navegação.</p>
+</div>

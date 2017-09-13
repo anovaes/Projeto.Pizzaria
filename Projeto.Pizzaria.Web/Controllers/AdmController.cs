@@ -13,15 +13,26 @@ namespace Projeto.Pizzaria.Web.Controllers
 {
     public class AdmController : Controller
     {
+        readonly IDaoCategoriaProduto _daoCategoria;
+
+        public AdmController(IDaoCategoriaProduto daoCategoria)
+        {
+            _daoCategoria = daoCategoria;
+        }
+
         // GET: Adm
         public ActionResult Index()
         {
-            var dao = new DaoCategoriaProduto();
-            var categorias = Mapper.Map<IEnumerable<CategoriaProduto>, IEnumerable<CategoriaProdutoModel>>(dao.Consultar(new CategoriaProduto()));
-            return View(categorias);
-
-            
+            return View();
         }
+
+        public ActionResult CategoriaProduto()
+        {
+            //var dao = new DaoCategoriaProduto();
+            var categorias = Mapper.Map<IEnumerable<CategoriaProduto>, IEnumerable<CategoriaProdutoModel>>(_daoCategoria.Consultar(new CategoriaProduto()));
+            return View(categorias);
+        }
+
         [HttpGet]
         public ActionResult Produtos()
         {
@@ -30,57 +41,56 @@ namespace Projeto.Pizzaria.Web.Controllers
             return View(categorias);
         }
 
-
-        public ActionResult Create()
+        public ActionResult CreateCategoriaProduto()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(CategoriaProdutoModel item)
+        public ActionResult CreateCategoriaProduto(CategoriaProdutoModel item)
         {
             var categoria = Mapper.Map<CategoriaProdutoModel, CategoriaProduto>(item);
-            var dao = new DaoCategoriaProduto();
-            dao.Incluir(categoria);
-            return RedirectToAction("Index");
+            //var dao = new DaoCategoriaProduto();
+            _daoCategoria.Incluir(categoria);
+            return RedirectToAction("CategoriaProduto");
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult EditCategoriaProduto(int id)
         {
-            var dao = new DaoCategoriaProduto();
-            var categoria = Mapper.Map<CategoriaProduto, CategoriaProdutoModel>(dao.Buscar(id));
+            //var dao = new DaoCategoriaProduto();
+            var categoria = Mapper.Map<CategoriaProduto, CategoriaProdutoModel>(_daoCategoria.Buscar(id));
             return View(categoria);
         }
 
         [HttpPost]
-        public ActionResult Edit(CategoriaProdutoModel item)
+        public ActionResult EditCategoriaProduto(CategoriaProdutoModel item)
         {
             var categoria = Mapper.Map<CategoriaProdutoModel, CategoriaProduto>(item);
-            var dao = new DaoCategoriaProduto();
-            dao.Alterar(categoria);
-            return RedirectToAction("Index");
+            //var dao = new DaoCategoriaProduto();
+            _daoCategoria.Alterar(categoria);
+            return RedirectToAction("CategoriaProduto");
         }
 
-        public ActionResult Details(int id)
+        public ActionResult DetailsCategoriaProduto(int id)
         {
-            var dao = new DaoCategoriaProduto();
-            var categoria = Mapper.Map<CategoriaProduto, CategoriaProdutoModel>(dao.Buscar(id));
+            //var dao = new DaoCategoriaProduto();
+            var categoria = Mapper.Map<CategoriaProduto, CategoriaProdutoModel>(_daoCategoria.Buscar(id));
             return View(categoria);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult DeleteCategoriaProduto(int id)
         {
-            var dao = new DaoCategoriaProduto();
-            var categoria = Mapper.Map<CategoriaProduto, CategoriaProdutoModel>(dao.Buscar(id));
+            //var dao = new DaoCategoriaProduto();
+            var categoria = Mapper.Map<CategoriaProduto, CategoriaProdutoModel>(_daoCategoria.Buscar(id));
             return View(categoria);
         }
 
         [HttpPost]
-        public ActionResult Delete(CategoriaProduto item)
+        public ActionResult DeleteCategoriaProduto(CategoriaProduto item)
         {
-            var dao = new DaoCategoriaProduto();
-            dao.Deletar(int.Parse(item.Id.ToString()));
-            return RedirectToAction("Index");
+            //var dao = new DaoCategoriaProduto();
+            _daoCategoria.Deletar(int.Parse(item.Id.ToString()));
+            return RedirectToAction("CategoriaProduto");
         }
     }
 }

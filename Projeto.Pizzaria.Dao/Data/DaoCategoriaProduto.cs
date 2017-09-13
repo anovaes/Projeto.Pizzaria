@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Projeto.Pizzaria.Dao.Data
 {
-    public class DaoCategoriaProduto : IDao<CategoriaProduto>
+    public class DaoCategoriaProduto : IDaoCategoriaProduto
     {
         public void Alterar(CategoriaProduto item)
         {
@@ -47,7 +47,7 @@ namespace Projeto.Pizzaria.Dao.Data
             }
         }
 
-        public List<CategoriaProduto> BuscarTodos()
+        public List<IDaoCategoriaProduto> BuscarTodos()
         {
             var query = @"
                 SELECT 
@@ -59,7 +59,7 @@ namespace Projeto.Pizzaria.Dao.Data
 
             using (var conn = new SqlConnection(Util.Util.ConnectionString()))
             {
-                var categoria = conn.Query<CategoriaProduto>(query);
+                var categoria = conn.Query<IDaoCategoriaProduto>(query);
                 return categoria.ToList();
             }
         }

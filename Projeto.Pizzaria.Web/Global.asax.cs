@@ -1,4 +1,5 @@
-﻿using Projeto.Pizzaria.Web.Mappers;
+﻿using Projeto.Pizzaria.Web.App_Start;
+using Projeto.Pizzaria.Web.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace Projeto.Pizzaria.Web
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             AutoMapperConfig.RegisterMappings();
+
+            IocConfig.ConfigurarDependencias();
         }
     }
 }
